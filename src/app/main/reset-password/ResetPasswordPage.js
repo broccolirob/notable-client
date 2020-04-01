@@ -3,9 +3,6 @@ import { useForm } from '@fuse/hooks';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { darken } from '@material-ui/core/styles/colorManipulator';
 import TextField from '@material-ui/core/TextField';
@@ -21,15 +18,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function RegisterPage() {
+function ResetPasswordPage() {
 	const classes = useStyles();
 
 	const { form, handleChange, resetForm } = useForm({
 		name: '',
 		email: '',
 		password: '',
-		passwordConfirm: '',
-		acceptTermsConditions: false
+		passwordConfirm: ''
 	});
 
 	function isFormValid() {
@@ -37,8 +33,7 @@ function RegisterPage() {
 			form.email.length > 0 &&
 			form.password.length > 0 &&
 			form.password.length > 3 &&
-			form.password === form.passwordConfirm &&
-			form.acceptTermsConditions
+			form.password === form.passwordConfirm
 		);
 	}
 
@@ -56,31 +51,19 @@ function RegisterPage() {
 							<img className="w-128 m-32" src="assets/images/logos/fuse.svg" alt="logo" />
 
 							<Typography variant="h6" className="mt-16 mb-32">
-								CREATE AN ACCOUNT
+								RESET YOUR PASSWORD
 							</Typography>
 
 							<form
-								name="registerForm"
+								name="resetForm"
 								noValidate
 								className="flex flex-col justify-center w-full"
 								onSubmit={handleSubmit}
 							>
 								<TextField
 									className="mb-16"
-									label="Name"
-									autoFocus
-									type="name"
-									name="name"
-									value={form.name}
-									onChange={handleChange}
-									variant="outlined"
-									required
-									fullWidth
-								/>
-
-								<TextField
-									className="mb-16"
 									label="Email"
+									autoFocus
 									type="email"
 									name="email"
 									value={form.email}
@@ -114,35 +97,21 @@ function RegisterPage() {
 									fullWidth
 								/>
 
-								<FormControl className="items-center">
-									<FormControlLabel
-										control={
-											<Checkbox
-												name="acceptTermsConditions"
-												checked={form.acceptTermsConditions}
-												onChange={handleChange}
-											/>
-										}
-										label="I read and accept terms and conditions"
-									/>
-								</FormControl>
-
 								<Button
 									variant="contained"
 									color="primary"
 									className="w-224 mx-auto mt-16"
-									aria-label="Register"
+									aria-label="Reset"
 									disabled={!isFormValid()}
 									type="submit"
 								>
-									CREATE AN ACCOUNT
+									RESET MY PASSWORD
 								</Button>
 							</form>
 
 							<div className="flex flex-col items-center justify-center pt-32 pb-24">
-								<span className="font-medium">Already have an account?</span>
-								<Link className="font-medium" to="/login">
-									Login
+								<Link className="font-medium" to="/pages/auth/login">
+									Go back to login
 								</Link>
 							</div>
 						</CardContent>
@@ -153,4 +122,4 @@ function RegisterPage() {
 	);
 }
 
-export default RegisterPage;
+export default ResetPasswordPage;
