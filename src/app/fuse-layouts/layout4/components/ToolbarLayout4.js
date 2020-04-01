@@ -1,16 +1,16 @@
-import FuseSearch from '@fuse/core/FuseSearch';
 import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
+import Icon from '@material-ui/core/Icon';
+import Badge from '@material-ui/core/Badge';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Logo from 'app/fuse-layouts/shared-components/Logo';
 import NavbarMobileToggleButton from 'app/fuse-layouts/shared-components/NavbarMobileToggleButton';
 import QuickPanelToggleButton from 'app/fuse-layouts/shared-components/quickPanel/QuickPanelToggleButton';
 import UserMenu from 'app/fuse-layouts/shared-components/UserMenu';
 import clsx from 'clsx';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import LanguageSwitcher from '../../shared-components/LanguageSwitcher';
+import NotesLogo from './NotesLogo';
 
 const useStyles = makeStyles(theme => ({
 	separator: {
@@ -42,33 +42,20 @@ function ToolbarLayout4(props) {
 						</Hidden>
 					)}
 
-					<Hidden mdDown>
-						<div className={clsx('flex flex-shrink-0 items-center')}>
-							<Logo />
-						</div>
-					</Hidden>
-
-					<div className="flex flex-1">
-						<Hidden xsDown>
-							<FuseSearch className="mx-16 lg:mx-24" variant="basic" />
-						</Hidden>
+					<div className={clsx('flex flex-1 flex-shrink-0 items-center')}>
+						<NotesLogo />
 					</div>
 
 					<div className="flex">
-						<Hidden smUp>
-							<FuseSearch />
-							<div className={classes.separator} />
-						</Hidden>
-
 						<UserMenu />
 
 						<div className={classes.separator} />
 
-						<LanguageSwitcher />
-
-						<div className={classes.separator} />
-
-						<QuickPanelToggleButton />
+						<QuickPanelToggleButton>
+							<Badge color="error" variant="dot" invisible={false}>
+								<Icon>notifications</Icon>
+							</Badge>
+						</QuickPanelToggleButton>
 
 						<Hidden mdDown>
 							<div className={classes.separator} />
