@@ -1,39 +1,48 @@
-import DemoContent from '@fuse/core/DemoContent';
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import withReducer from 'app/store/withReducer';
+import React, { useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import LabelsDialog from './dialogs/labels/LabelsDialog';
+import NoteDialog from './dialogs/note/NoteDialog';
+import NewNote from './NewNote';
+import NoteList from './NoteList';
+import NotesHeader from './NotesHeader';
+import NotesSidebarContent from './NotesSidebarContent';
+import * as Actions from './store/actions';
+import reducer from './store/reducers';
 
-const useStyles = makeStyles(theme => ({
-	layoutRoot: {}
-}));
+function Notes(props) {
+	const dispatch = useDispatch();
+	const pageLayout = useRef(null);
 
-function NotesPage(props) {
-	const classes = useStyles(props);
+	useEffect(() => {
+		dispatch(Actions.getNotes());
+		dispatch(Actions.getLabels());
+	}, [dispatch]);
 
 	return (
 		<FusePageSimple
 			classes={{
-				root: classes.layoutRoot
+				contentWrapper: 'p-16 sm:p-24 pb-80',
+				content: 'flex min-h-full',
+				leftSidebar: 'w-256 border-0',
+				header: 'min-h-72 h-72'
 			}}
-			header={
-				<div className="p-24">
-					<h4>Notes</h4>
-				</div>
-			}
-			contentToolbar={
-				<div className="px-24">
-					<h4>Content Toolbar</h4>
-				</div>
-			}
+			header={<NotesHeader pageLayout={pageLayout} />}
 			content={
-				<div className="p-24">
-					<h4>Content</h4>
-					<br />
-					<DemoContent />
+				<div className="flex flex-col w-full items-center">
+					<NewNote />
+					<NoteList />
+					<NoteDialog />
+					<LabelsDialog />
 				</div>
 			}
+			leftSidebarContent={<NotesSidebarContent />}
+			sidebarInner
+			ref={pageLayout}
+			innerScroll
 		/>
 	);
 }
 
-export default NotesPage;
+export default withReducer('notes', reducer)(Notes);
