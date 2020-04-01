@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import { authRoles } from 'app/auth';
 import Example from './Example';
 import en from './i18n/en';
 import tr from './i18n/tr';
@@ -14,6 +15,7 @@ const ExampleConfig = {
 			config: {}
 		}
 	},
+	auth: authRoles.user,
 	routes: [
 		{
 			path: '/example',

@@ -4,7 +4,7 @@ const config = {
 		mode: 'container',
 		scroll: 'content',
 		navbar: {
-			display: true
+			display: false
 		},
 		toolbar: {
 			display: true,
@@ -12,13 +12,16 @@ const config = {
 		},
 		footer: {
 			display: true,
-			style: 'fixed'
+			style: 'static'
 		},
 		leftSidePanel: {
-			display: true
+			display: false
 		},
 		rightSidePanel: {
 			display: true
+		},
+		settingsPanel: {
+			display: false
 		}
 	},
 	form: {

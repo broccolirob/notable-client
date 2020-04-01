@@ -97,7 +97,7 @@ function Layout4(props) {
 
 						{config.footer.display && config.footer.style === 'fixed' && <FooterLayout4 />}
 
-						<SettingsPanel />
+						{config.settingsPanel.display && <SettingsPanel />}
 					</div>
 
 					{config.rightSidePanel.display && <RightSideLayout4 />}
