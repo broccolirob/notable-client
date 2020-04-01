@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import FuseUtils from '@fuse/utils';
-import ExampleConfig from 'app/main/example/ExampleConfig';
+import NotesConfig from 'app/main/notes/NotesConfig';
 import LogoutConfig from 'app/main/logout/LogoutConfig';
 import LoginConfig from 'app/main/login/LoginConfig';
 import RegisterConfig from 'app/main/register/RegisterConfig';
@@ -9,7 +9,7 @@ import ForgotPasswordConfig from 'app/main/forgot-password/ForgotPasswordPageCon
 import ResetPasswordConfig from 'app/main/reset-password/ResetPasswordPageConfig';
 
 const routeConfigs = [
-	ExampleConfig,
+	NotesConfig,
 	LogoutConfig,
 	LoginConfig,
 	RegisterConfig,
@@ -21,7 +21,7 @@ const routes = [
 	...FuseUtils.generateRoutesFromConfigs(routeConfigs),
 	{
 		path: '/',
-		component: () => <Redirect to="/example" />
+		component: () => <Redirect to="/dashboard" />
 	}
 ];
 
