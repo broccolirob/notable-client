@@ -5,6 +5,7 @@ import * as Actions from 'app/store/actions';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import NotableSplashScreen from 'app/app-layouts/shared-components/NotableSplashScreen';
 
 class Auth extends Component {
 	state = {
@@ -61,7 +62,7 @@ class Auth extends Component {
 		});
 
 	render() {
-		return this.state.waitAuthCheck ? <FuseSplashScreen /> : <>{this.props.children}</>;
+		return this.state.waitAuthCheck ? <NotableSplashScreen /> : <>{this.props.children}</>;
 	}
 }
 
