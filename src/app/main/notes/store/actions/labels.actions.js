@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const GET_LABELS = '[NOTES] GET LABELS';
-export const LABELS_DIALOG_OPEN = '[NOTES] LABELS DIALOG OPEN';
-export const LABELS_DIALOG_CLOSE = '[NOTES] LABELS DIALOG CLOSE';
-export const UPDATE_LABELS = '[NOTES] LABELS UPDATE LABELS';
+export const GET_LABELS = '[NOTES APP] GET LABELS';
+export const LABELS_DIALOG_OPEN = '[NOTES APP] LABELS DIALOG OPEN';
+export const LABELS_DIALOG_CLOSE = '[NOTES APP] LABELS DIALOG CLOSE';
+export const UPDATE_LABELS = '[NOTES APP] LABELS UPDATE LABELS';
 
 export function getLabels() {
 	const request = axios.get('/api/labels');

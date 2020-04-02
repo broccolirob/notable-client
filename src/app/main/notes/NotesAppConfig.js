@@ -1,5 +1,5 @@
 import { authRoles } from 'app/auth';
-import Notes from './Notes';
+import Notes from './NotesApp';
 
 const NotesConfig = {
 	settings: {

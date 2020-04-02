@@ -45,4 +45,4 @@ function Notes(props) {
 	);
 }
 
-export default withReducer('notes', reducer)(Notes);
+export default withReducer('notesApp', reducer)(Notes);
