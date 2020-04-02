@@ -9,9 +9,9 @@ import {
 } from '@fuse/default-settings';
 import _ from '@lodash';
 import { createMuiTheme } from '@material-ui/core/styles';
-import FuseSettingsConfig from 'app/fuse-configs/settingsConfig';
-import FuseThemesConfig from 'app/fuse-configs/themesConfig';
-import FuseLayoutConfigs from 'app/fuse-layouts/FuseLayoutConfigs';
+import FuseSettingsConfig from 'app/app-configs/settingsConfig';
+import FuseThemesConfig from 'app/app-configs/themesConfig';
+import FuseLayoutConfigs from 'app/app-layouts/AppLayoutConfigs';
 import * as Actions from 'app/store/actions/fuse';
 
 const themesObjRaw = Object.keys(FuseThemesConfig).length !== 0 ? FuseThemesConfig : defaultThemes;

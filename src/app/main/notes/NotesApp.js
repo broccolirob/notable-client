@@ -40,7 +40,6 @@ function Notes(props) {
 			leftSidebarContent={<NotesSidebarContent />}
 			sidebarInner
 			ref={pageLayout}
-			innerScroll
 		/>
 	);
 }

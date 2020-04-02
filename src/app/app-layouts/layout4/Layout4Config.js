@@ -1,24 +1,27 @@
 const config = {
-	title: 'Layout 2 - Horizontal',
+	title: 'Layout 4',
 	defaults: {
-		mode: 'fullwidth',
+		mode: 'container',
 		scroll: 'content',
 		navbar: {
-			display: true
+			display: false
 		},
 		toolbar: {
 			display: true,
-			position: 'below'
+			position: 'above'
 		},
 		footer: {
 			display: true,
-			style: 'fixed'
+			style: 'static'
 		},
 		leftSidePanel: {
-			display: true
+			display: false
 		},
 		rightSidePanel: {
 			display: true
+		},
+		settingsPanel: {
+			display: false
 		}
 	},
 	form: {

@@ -2,12 +2,13 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import NavbarMobileLayout2 from 'app/fuse-layouts/layout2/components/NavbarMobileLayout2';
-import NavbarMobileToggleFab from 'app/fuse-layouts/shared-components/NavbarMobileToggleFab';
+import NavbarMobileToggleFab from 'app/app-layouts/shared-components/NavbarMobileToggleFab';
 import * as Actions from 'app/store/actions';
+import clsx from 'clsx';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import NavbarLayout2 from './NavbarLayout2';
+import NavbarLayout4 from './NavbarLayout4';
+import NavbarMobileLayout4 from './NavbarMobileLayout4';
 
 const navbarWidth = 280;
 
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function NavbarWrapperLayout2(props) {
+function NavbarWrapperLayout4(props) {
 	const dispatch = useDispatch();
 	const config = useSelector(({ fuse }) => fuse.settings.current.layout.config);
 	const navbarTheme = useSelector(({ fuse }) => fuse.settings.navbarTheme);
@@ -49,8 +50,8 @@ function NavbarWrapperLayout2(props) {
 		<>
 			<ThemeProvider theme={navbarTheme}>
 				<Hidden mdDown>
-					<Paper className={classes.navbar} square>
-						<NavbarLayout2 />
+					<Paper className={clsx(classes.navbar)} square>
+						<NavbarLayout4 />
 					</Paper>
 				</Hidden>
 
@@ -67,7 +68,7 @@ function NavbarWrapperLayout2(props) {
 							keepMounted: true // Better open performance on mobile.
 						}}
 					>
-						<NavbarMobileLayout2 />
+						<NavbarMobileLayout4 />
 					</Drawer>
 				</Hidden>
 			</ThemeProvider>
@@ -81,4 +82,4 @@ function NavbarWrapperLayout2(props) {
 	);
 }
 
-export default React.memo(NavbarWrapperLayout2);
+export default React.memo(NavbarWrapperLayout4);

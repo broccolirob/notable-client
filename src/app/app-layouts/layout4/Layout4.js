@@ -4,16 +4,16 @@ import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import FuseSuspense from '@fuse/core/FuseSuspense';
 import { makeStyles } from '@material-ui/core/styles';
 import AppContext from 'app/AppContext';
-import SettingsPanel from 'app/fuse-layouts/shared-components/SettingsPanel';
+import SettingsPanel from 'app/app-layouts/shared-components/SettingsPanel';
 import clsx from 'clsx';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
-import FooterLayout2 from './components/FooterLayout2';
-import LeftSideLayout2 from './components/LeftSideLayout2';
-import NavbarWrapperLayout2 from './components/NavbarWrapperLayout2';
-import RightSideLayout2 from './components/RightSideLayout2';
-import ToolbarLayout2 from './components/ToolbarLayout2';
+import FooterLayout4 from './components/FooterLayout4';
+import LeftSideLayout4 from './components/LeftSideLayout4';
+import NavbarWrapperLayout4 from './components/NavbarWrapperLayout4';
+import RightSideLayout4 from './components/RightSideLayout4';
+import ToolbarLayout4 from './components/ToolbarLayout4';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 		height: '100%',
 		overflow: 'hidden',
 		'&.boxed': {
-			maxWidth: 1280,
+			maxWidth: 1120,
 			margin: '0 auto',
 			boxShadow: theme.shadows[3]
 		},
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Layout2(props) {
+function Layout4(props) {
 	const config = useSelector(({ fuse }) => fuse.settings.current.layout.config);
 
 	const classes = useStyles(props);
@@ -74,16 +74,16 @@ function Layout2(props) {
 		<AppContext.Consumer>
 			{({ routes }) => (
 				<div id="fuse-layout" className={clsx(classes.root, config.mode)}>
-					{config.leftSidePanel.display && <LeftSideLayout2 />}
+					{config.leftSidePanel.display && <LeftSideLayout4 />}
 
 					<div className="flex flex-1 flex-col overflow-hidden relative">
-						{config.toolbar.display && config.toolbar.position === 'above' && <ToolbarLayout2 />}
+						{config.toolbar.display && config.toolbar.position === 'above' && <ToolbarLayout4 />}
 
-						{config.navbar.display && <NavbarWrapperLayout2 />}
+						{config.navbar.display && <NavbarWrapperLayout4 />}
 
-						{config.toolbar.display && config.toolbar.position === 'below' && <ToolbarLayout2 />}
+						{config.toolbar.display && config.toolbar.position === 'below' && <ToolbarLayout4 />}
 
-						<FuseScrollbars className={classes.content} scrollToTopOnRouteChange>
+						<FuseScrollbars className={clsx(classes.content)} scrollToTopOnRouteChange>
 							<FuseDialog />
 
 							<div className="flex flex-auto flex-col relative h-full">
@@ -91,16 +91,16 @@ function Layout2(props) {
 
 								{props.children}
 
-								{config.footer.display && config.footer.style === 'static' && <FooterLayout2 />}
+								{config.footer.display && config.footer.style === 'static' && <FooterLayout4 />}
 							</div>
 						</FuseScrollbars>
 
-						{config.footer.display && config.footer.style === 'fixed' && <FooterLayout2 />}
+						{config.footer.display && config.footer.style === 'fixed' && <FooterLayout4 />}
 
-						<SettingsPanel />
+						{config.settingsPanel.display && <SettingsPanel />}
 					</div>
 
-					{config.rightSidePanel.display && <RightSideLayout2 />}
+					{config.rightSidePanel.display && <RightSideLayout4 />}
 
 					<FuseMessage />
 				</div>
@@ -109,4 +109,4 @@ function Layout2(props) {
 	);
 }
 
-export default React.memo(Layout2);
+export default React.memo(Layout4);

@@ -1,4 +1,4 @@
-import navigationConfig from 'app/fuse-configs/navigationConfig';
+import navigationConfig from 'app/app-configs/navigationConfig';
 import * as Actions from '../../actions/fuse';
 
 const initialState = navigationConfig;

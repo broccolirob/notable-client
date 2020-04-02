@@ -3,11 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Logo from 'app/fuse-layouts/shared-components/Logo';
-import NavbarFoldedToggleButton from 'app/fuse-layouts/shared-components/NavbarFoldedToggleButton';
-import NavbarMobileToggleButton from 'app/fuse-layouts/shared-components/NavbarMobileToggleButton';
-import Navigation from 'app/fuse-layouts/shared-components/Navigation';
-import UserNavbarHeader from 'app/fuse-layouts/shared-components/UserNavbarHeader';
+import Logo from 'app/app-layouts/shared-components/Logo';
+import NavbarFoldedToggleButton from 'app/app-layouts/shared-components/NavbarFoldedToggleButton';
+import NavbarMobileToggleButton from 'app/app-layouts/shared-components/NavbarMobileToggleButton';
+import Navigation from 'app/app-layouts/shared-components/Navigation';
+import UserNavbarHeader from 'app/app-layouts/shared-components/UserNavbarHeader';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 	}
 });
 
-function NavbarMobileLayout2(props) {
+function NavbarMobileLayout4(props) {
 	const classes = useStyles(props);
 	const theme = useTheme();
 
@@ -60,4 +60,4 @@ function NavbarMobileLayout2(props) {
 	);
 }
 
-export default React.memo(NavbarMobileLayout2);
+export default React.memo(NavbarMobileLayout4);
