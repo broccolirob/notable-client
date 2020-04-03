@@ -94,6 +94,7 @@
 		"eslint-config-prettier": "^6.10.0",
 		"eslint-import-resolver-node": "^0.3.3",
 		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-jest": "^23.8.2",
 		"eslint-plugin-jsx-a11y": "^6.2.3",
 		"eslint-plugin-prettier": "^3.1.2",
 		"eslint-plugin-react": "^7.19.0",
@@ -109,6 +110,7 @@
 	"scripts": {
 		"start": "npm run tailwind && react-scripts start",
 		"build": "npm run tailwind && npm run purge-tailwind && cross-env GENERATE_SOURCEMAP=false react-scripts build",
+		"deploy": "npm run build && aws s3 cp build/ s3://broccolispot.com --recursive",
 		"tailwind": "tailwind build ./src/styles/tailwind-config.css -c ./tailwind.config.js -o ./src/styles/tailwind.css",
 		"purge-tailwind": "node ./purge-tailwindcss.js",
 		"test": "react-scripts test --env=node",
@@ -116,8 +118,7 @@
 		"build-docs": "find ./src/app/main/documentation/material-ui-components \\( -name '*.ts' -o -name '*.tsx' \\) -type f -delete && babel-node --presets @babel/preset-env src/app/main/documentation/material-ui-components/build.js",
 		"analyze": "npm run tailwind && npm run purge-tailwind && react-scripts build && source-map-explorer 'build/static/js/*.js' --html analyze-result.html",
 		"pnpify-sdk": "npm pnpify --sdk",
-		"lint": "eslint",
-		"deploy": "npm run build && aws s3 cp build/ s3://broccolispot.com --recursive"
+		"lint": "eslint"
 	},
 	"browserslist": {
 		"production": [
