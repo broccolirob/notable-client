@@ -1,4 +1,3 @@
-import FuseSplashScreen from '@fuse/core/FuseSplashScreen';
 import * as userActions from 'app/auth/store/actions';
 import jwtService from 'app/services/jwtService';
 import * as Actions from 'app/store/actions';
