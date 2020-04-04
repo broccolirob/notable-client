@@ -5,6 +5,14 @@ import React from 'react';
 
 const useStyles = makeStyles(theme => ({
 	root: {
+		'& .logo-icon': {
+			width: 24,
+			height: 24,
+			transition: theme.transitions.create(['width', 'height'], {
+				duration: theme.transitions.duration.shortest,
+				easing: theme.transitions.easing.easeInOut
+			})
+		},
 		'& .logo-text': {
 			transition: theme.transitions.create('opacity', {
 				duration: theme.transitions.duration.shortest,

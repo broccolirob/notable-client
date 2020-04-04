@@ -7,6 +7,7 @@ import LoginConfig from 'app/main/login/LoginConfig';
 import RegisterConfig from 'app/main/register/RegisterConfig';
 import ForgotPasswordConfig from 'app/main/forgot-password/ForgotPasswordPageConfig';
 import ResetPasswordConfig from 'app/main/reset-password/ResetPasswordPageConfig';
+import ErrorPageConfig from 'app/main/errorPages/errorPageConfig';
 
 const routeConfigs = [
 	NotesAppConfig,
@@ -14,14 +15,19 @@ const routeConfigs = [
 	LoginConfig,
 	RegisterConfig,
 	ForgotPasswordConfig,
-	ResetPasswordConfig
+	ResetPasswordConfig,
+	ErrorPageConfig
 ];
 
 const routes = [
 	...FuseUtils.generateRoutesFromConfigs(routeConfigs),
 	{
 		path: '/',
+		exact: true,
 		component: () => <Redirect to="/dashboard" />
+	},
+	{
+		component: () => <Redirect to="/404" />
 	}
 ];
 

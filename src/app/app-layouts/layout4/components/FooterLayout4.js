@@ -17,7 +17,7 @@ function FooterLayout4(props) {
 				style={{ backgroundColor: footerTheme.palette.background.default }}
 			>
 				<Toolbar className="flex items-center container py-0 px-16 lg:px-24">
-					<Typography>Footer</Typography>
+					<Typography>Copyright &copy; 2020 Notable, Inc. All rights reserved</Typography>
 				</Toolbar>
 			</AppBar>
 		</ThemeProvider>
