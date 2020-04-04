@@ -1,1 +1,12 @@
 version: '2.4'
+
+services:
+    client:
+        build:
+            context: .
+            target: dev
+        ports:
+            - '3000:3000'
+        volumes:
+            - .:/node/app
+            - /node/app/node_modules

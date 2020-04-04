@@ -175,4 +175,7 @@ sketch
 # Ignore all local history of files
 .history
 
+### dotenv ###
+.env
+
 # End of https://www.gitignore.io/api/git,node,react,macos,visualstudiocode

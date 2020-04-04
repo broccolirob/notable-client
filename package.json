@@ -111,7 +111,7 @@
 		"start": "npm run tailwind && react-scripts start",
 		"build": "npm run tailwind && npm run purge-tailwind && cross-env GENERATE_SOURCEMAP=false react-scripts build",
 		"deploy": "npm run build && aws s3 cp build/ s3://notedemoapp.com --recursive",
-		"dock:build": "docker image build -t rschn/notable-client .",
+		"dock:build": "docker image build -t rschn/notable-client --target prod .",
 		"dock:push": "docker image push rschn/notable-client",
 		"dock:update": "npm run build && npm run dock:build && npm run dock:push",
 		"tailwind": "tailwind build ./src/styles/tailwind-config.css -c ./tailwind.config.js -o ./src/styles/tailwind.css",
