@@ -46,10 +46,10 @@ function Login() {
 				<FuseAnimate animation="transition.expandIn">
 					<Card className="w-full max-w-384">
 						<CardContent className="flex flex-col items-center justify-center p-32">
-							<img className="w-128 m-32" src="assets/images/logos/fuse.svg" alt="logo" />
+							<img className="w-128 m-32" src="assets/images/logos/bearLogo.png" alt="logo" />
 
 							<Typography variant="h6" className="mt-16 mb-32">
-								LOGIN TO YOUR ACCOUNT
+								LOGIN TO NOTABLE
 							</Typography>
 
 							<form
@@ -60,7 +60,7 @@ function Login() {
 							>
 								<TextField
 									className="mb-16"
-									label="Email"
+									label="Username or Email"
 									autoFocus
 									type="email"
 									name="email"
@@ -120,20 +120,7 @@ function Login() {
 								<Divider className="w-32" />
 							</div>
 
-							<Button
-								variant="contained"
-								color="secondary"
-								size="small"
-								className="normal-case w-192 mb-8"
-							>
-								Log in with Google
-							</Button>
-
-							<Button variant="contained" color="primary" size="small" className="normal-case w-192">
-								Log in with Facebook
-							</Button>
-
-							<div className="flex flex-col items-center justify-center pt-32 pb-24">
+							<div className="flex flex-col items-center justify-center pb-24">
 								<span className="font-medium">Don't have an account?</span>
 								<Link className="font-medium" to="/register">
 									Create an account

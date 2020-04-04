@@ -1,4 +1,4 @@
-import Notes from './NotesApp';
+import React from 'react';
 
 const NotesConfig = {
 	settings: {
@@ -9,7 +9,7 @@ const NotesConfig = {
 	routes: [
 		{
 			path: '/dashboard/:id?/:labelHandle?/:labelId?',
-			component: Notes
+			component: React.lazy(() => import('./Notes'))
 		}
 	]
 };

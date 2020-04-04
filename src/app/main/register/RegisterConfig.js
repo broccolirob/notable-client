@@ -1,5 +1,5 @@
+import React from 'react';
 import { authRoles } from 'app/auth';
-import Register from './Register';
 
 const RegisterConfig = {
 	settings: {
@@ -27,7 +27,7 @@ const RegisterConfig = {
 	routes: [
 		{
 			path: '/register',
-			component: Register
+			component: React.lazy(() => import('./Register'))
 		}
 	]
 };

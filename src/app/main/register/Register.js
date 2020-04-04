@@ -53,7 +53,7 @@ function RegisterPage() {
 				<FuseAnimate animation="transition.expandIn">
 					<Card className="w-full max-w-384">
 						<CardContent className="flex flex-col items-center justify-center p-32">
-							<img className="w-128 m-32" src="assets/images/logos/fuse.svg" alt="logo" />
+							<img className="w-128 m-32" src="assets/images/logos/bearLogo.png" alt="logo" />
 
 							<Typography variant="h6" className="mt-16 mb-32">
 								CREATE AN ACCOUNT
@@ -67,7 +67,7 @@ function RegisterPage() {
 							>
 								<TextField
 									className="mb-16"
-									label="Name"
+									label="Username"
 									autoFocus
 									type="name"
 									name="name"
