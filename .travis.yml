@@ -12,6 +12,7 @@ script:
 before_deploy:
     - npm i -g travis-ci-cloudfront-invalidation
     - npm run build
+    - docker image build -t $DOCKER_HUB_REPO .
     - bash scripts/docker_push.sh
 deploy:
     provider: s3
