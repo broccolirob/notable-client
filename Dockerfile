@@ -11,9 +11,9 @@ RUN apk add --no-cache tini
 
 WORKDIR /app
 
-COPY ./build .
-
 RUN npm i -g serve
+
+COPY ./build .
 
 ENTRYPOINT ["/sbin/tini", "--"]
 

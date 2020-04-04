@@ -1,6 +1,8 @@
 language: node_js
 node_js:
     - '12'
+services:
+    - docker
 cache:
     # npm is cached by default
     directories:
@@ -10,6 +12,7 @@ script:
 before_deploy:
     - npm i -g travis-ci-cloudfront-invalidation
     - npm run build
+    - bash scripts/docker_push.sh
 deploy:
     provider: s3
     access_key_id: $AWS_ACCESS_KEY_ID
