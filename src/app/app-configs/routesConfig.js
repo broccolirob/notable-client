@@ -7,7 +7,7 @@ import LoginConfig from 'app/main/login/LoginConfig';
 import RegisterConfig from 'app/main/register/RegisterConfig';
 import ForgotPasswordConfig from 'app/main/forgot-password/ForgotPasswordPageConfig';
 import ResetPasswordConfig from 'app/main/reset-password/ResetPasswordPageConfig';
-import ErrorPageConfig from 'app/main/errorPages/ErrorPageConfig';
+import ErrorPageConfig from 'app/main/error-pages/ErrorPageConfig';
 
 const routeConfigs = [
 	NotesAppConfig,
