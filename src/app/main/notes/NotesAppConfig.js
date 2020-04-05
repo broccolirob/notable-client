@@ -1,4 +1,5 @@
 import React from 'react';
+import { authRoles } from 'app/auth';
 
 const NotesConfig = {
 	settings: {
@@ -6,6 +7,7 @@ const NotesConfig = {
 			config: {}
 		}
 	},
+	auth: authRoles.user,
 	routes: [
 		{
 			path: '/dashboard/:id?/:labelHandle?/:labelId?',

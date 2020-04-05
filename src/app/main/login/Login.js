@@ -1,19 +1,20 @@
 import FuseAnimate from '@fuse/core/FuseAnimate';
-import { useForm } from '@fuse/hooks';
+import { TextFieldFormsy } from '@fuse/core/formsy';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { darken } from '@material-ui/core/styles/colorManipulator';
-import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
 import clsx from 'clsx';
-import React from 'react';
+import Formsy from 'formsy-react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import * as authActions from 'app/auth/store/actions';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -23,21 +24,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Login() {
+	const dispatch = useDispatch();
+	const login = useSelector(({ auth }) => auth.login);
 	const classes = useStyles();
+	const [isFormValid, setIsFormValid] = useState(false);
+	const formRef = useRef(null);
 
-	const { form, handleChange, resetForm } = useForm({
-		email: '',
-		password: '',
-		remember: true
-	});
+	useEffect(() => {
+		if (login.error && (login.error.email || login.error.password)) {
+			formRef.current.updateInputsWithError({ ...login.error });
+			disableButton();
+		}
+	}, [login.error]);
 
-	function isFormValid() {
-		return form.email.length > 0 && form.password.length > 0;
+	function disableButton() {
+		setIsFormValid(false);
 	}
 
-	function handleSubmit(ev) {
-		ev.preventDefault();
-		resetForm();
+	function enableButton() {
+		setIsFormValid(true);
+	}
+
+	function handleSubmit(model) {
+		console.log('Form submitted');
+		dispatch(authActions.submitLogin(model));
 	}
 
 	return (
@@ -52,67 +62,65 @@ function Login() {
 								LOGIN TO NOTABLE
 							</Typography>
 
-							<form
-								name="loginForm"
-								noValidate
+							<Formsy
+								onValidSubmit={handleSubmit}
+								onValid={enableButton}
+								onInvalid={disableButton}
+								ref={formRef}
 								className="flex flex-col justify-center w-full"
-								onSubmit={handleSubmit}
 							>
-								<TextField
+								<TextFieldFormsy
 									className="mb-16"
-									label="Username or Email"
-									autoFocus
-									type="email"
+									type="text"
 									name="email"
-									value={form.email}
-									onChange={handleChange}
+									label="Username/Email"
+									validations={{ minLength: 4 }}
+									validationErrors={{ minLength: 'Min character length is 4' }}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<Icon className="text-20" color="action">
+													email
+												</Icon>
+											</InputAdornment>
+										)
+									}}
 									variant="outlined"
 									required
-									fullWidth
 								/>
 
-								<TextField
+								<TextFieldFormsy
 									className="mb-16"
-									label="Password"
 									type="password"
 									name="password"
-									value={form.password}
-									onChange={handleChange}
+									label="Password"
+									validations={{ minLength: 4 }}
+									validationErrors={{ minLength: 'Min character length is 4' }}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<Icon className="text-20" color="action">
+													vpn_key
+												</Icon>
+											</InputAdornment>
+										)
+									}}
 									variant="outlined"
 									required
-									fullWidth
 								/>
 
-								<div className="flex items-center justify-between">
-									<FormControl>
-										<FormControlLabel
-											control={
-												<Checkbox
-													name="remember"
-													checked={form.remember}
-													onChange={handleChange}
-												/>
-											}
-											label="Remember Me"
-										/>
-									</FormControl>
-
-									<Link className="font-medium" to="/forgot-password">
-										Forgot Password?
-									</Link>
-								</div>
-
 								<Button
+									type="submit"
 									variant="contained"
 									color="primary"
-									className="w-224 mx-auto mt-16"
+									className="w-full mx-auto mt-16 normal-case"
 									aria-label="LOG IN"
-									disabled={!isFormValid()}
-									type="submit"
+									disabled={!isFormValid}
+									value="legacy"
 								>
-									LOGIN
+									Login
 								</Button>
-							</form>
+							</Formsy>
 
 							<div className="my-24 flex items-center justify-center">
 								<Divider className="w-32" />

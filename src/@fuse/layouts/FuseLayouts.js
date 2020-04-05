@@ -1,1 +1,1 @@
-export { default } from 'app/app-layouts/AppLayouts';
+export { default } from 'app/fuse-layouts/FuseLayouts';

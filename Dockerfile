@@ -17,7 +17,7 @@ COPY ./build .
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
-CMD ["serve", "-l", "80"]
+CMD ["serve", "-s", "-l", "80"]
 
 
 FROM prod as dev

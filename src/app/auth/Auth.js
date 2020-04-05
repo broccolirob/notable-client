@@ -4,7 +4,7 @@ import * as Actions from 'app/store/actions';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import NotableSplashScreen from 'app/app-layouts/shared-components/NotableSplashScreen';
+import NotableSplashScreen from 'app/fuse-layouts/shared-components/NotableSplashScreen';
 
 class Auth extends Component {
 	state = {
@@ -31,10 +31,11 @@ class Auth extends Component {
 						this.props.setUserData(user);
 
 						resolve();
-
+						console.log('SignInWithToken() was successful');
 						this.props.showMessage({ message: 'Logged in with JWT' });
 					})
 					.catch(error => {
+						console.log('SignInWithToken() was not successful', error);
 						this.props.showMessage({ message: error });
 
 						resolve();
