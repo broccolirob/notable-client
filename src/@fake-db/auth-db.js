@@ -19,39 +19,7 @@ const authDB = {
 			data: {
 				displayName: 'Abbott Keitch',
 				photoURL: 'assets/images/avatars/Abbott.jpg',
-				email: 'admin',
-				settings: {
-					layout: {
-						style: 'layout1',
-						config: {
-							scroll: 'content',
-							navbar: {
-								display: true,
-								folded: true,
-								position: 'left'
-							},
-							toolbar: {
-								display: true,
-								style: 'fixed',
-								position: 'below'
-							},
-							footer: {
-								display: true,
-								style: 'fixed',
-								position: 'below'
-							},
-							mode: 'fullwidth'
-						}
-					},
-					customScrollbars: true,
-					theme: {
-						main: 'defaultDark',
-						navbar: 'defaultDark',
-						toolbar: 'defaultDark',
-						footer: 'defaultDark'
-					}
-				},
-				shortcuts: ['calendar', 'mail', 'contacts']
+				email: 'admin'
 			}
 		},
 		{
@@ -62,35 +30,7 @@ const authDB = {
 			data: {
 				displayName: 'Arnold Matlock',
 				photoURL: 'assets/images/avatars/Arnold.jpg',
-				email: 'staff',
-				settings: {
-					layout: {
-						style: 'layout2',
-						config: {
-							mode: 'boxed',
-							scroll: 'content',
-							navbar: {
-								display: true
-							},
-							toolbar: {
-								display: true,
-								position: 'below'
-							},
-							footer: {
-								display: true,
-								style: 'fixed'
-							}
-						}
-					},
-					customScrollbars: true,
-					theme: {
-						main: 'greeny',
-						navbar: 'mainThemeDark',
-						toolbar: 'mainThemeDark',
-						footer: 'mainThemeDark'
-					}
-				},
-				shortcuts: ['calendar', 'mail', 'contacts', 'todo']
+				email: 'staff'
 			}
 		}
 	]
@@ -190,7 +130,7 @@ mock.onPost('/api/auth/register').reply(request => {
 mock.onPost('/api/auth/user/update').reply(config => {
 	const data = JSON.parse(config.data);
 	const { user } = data;
-
+	console.log('update called', data);
 	authDB.users = authDB.users.map(_user => {
 		if (user.uuid === user.id) {
 			return _.merge(_user, user);

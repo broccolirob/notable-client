@@ -1,7 +1,7 @@
 import layout4 from 'app/fuse-layouts/layout4/Layout4';
 
-const AppLayouts = {
+const FuseLayouts = {
 	layout4
 };
 
-export default AppLayouts;
+export default FuseLayouts;

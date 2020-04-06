@@ -88,7 +88,7 @@ export default settings;
  */
 function getInitialSettings() {
 	const defaultLayoutStyle =
-		FuseSettingsConfig.layout && FuseSettingsConfig.layout.style ? FuseSettingsConfig.layout.style : 'layout1';
+		FuseSettingsConfig.layout && FuseSettingsConfig.layout.style ? FuseSettingsConfig.layout.style : 'layout4';
 	const layout = {
 		style: defaultLayoutStyle,
 		config: FuseLayoutConfigs[defaultLayoutStyle].defaults

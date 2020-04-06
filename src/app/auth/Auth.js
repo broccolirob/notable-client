@@ -31,11 +31,9 @@ class Auth extends Component {
 						this.props.setUserData(user);
 
 						resolve();
-						console.log('SignInWithToken() was successful');
 						this.props.showMessage({ message: 'Logged in with JWT' });
 					})
 					.catch(error => {
-						console.log('SignInWithToken() was not successful', error);
 						this.props.showMessage({ message: error });
 
 						resolve();
