@@ -7,6 +7,7 @@ import LoginConfig from 'app/main/login/LoginConfig';
 import RegisterConfig from 'app/main/register/RegisterConfig';
 import ForgotPasswordConfig from 'app/main/forgot-password/ForgotPasswordPageConfig';
 import ResetPasswordConfig from 'app/main/reset-password/ResetPasswordPageConfig';
+import MailConfirmPageConfig from 'app/main/mail-confirm/MailConfirmPageConfig';
 import ErrorPageConfig from 'app/main/error-pages/ErrorPageConfig';
 
 const routeConfigs = [
@@ -16,6 +17,7 @@ const routeConfigs = [
 	RegisterConfig,
 	ForgotPasswordConfig,
 	ResetPasswordConfig,
+	MailConfirmPageConfig,
 	ErrorPageConfig
 ];
 

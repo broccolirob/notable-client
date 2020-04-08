@@ -21,7 +21,7 @@ class JwtService extends FuseUtils.EventEmitter {
 						this.emit('onAutoLogout', 'Invalid access_token');
 						this.setSession(null);
 					}
-					throw err;
+					resolve(err.response);
 				});
 			}
 		);
@@ -47,9 +47,9 @@ class JwtService extends FuseUtils.EventEmitter {
 
 	createUser = data => {
 		return new Promise((resolve, reject) => {
-			axios.post('/api/auth/register', data).then(response => {
+			axios.post(`http://api.localhost/api/auth/user/register`, data).then(response => {
 				if (response.data.user) {
-					this.setSession(response.data.access_token);
+					this.setSession(response.data.token);
 					resolve(response.data.user);
 				} else {
 					reject(response.data.error);
@@ -61,15 +61,13 @@ class JwtService extends FuseUtils.EventEmitter {
 	signInWithEmailAndPassword = (email, password) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get('/api/auth', {
-					data: {
-						email,
-						password
-					}
+				.post('http://api.localhost/api/auth', {
+					email,
+					password
 				})
 				.then(response => {
 					if (response.data.user) {
-						this.setSession(response.data.access_token);
+						this.setSession(response.data.token);
 						resolve(response.data.user);
 					} else {
 						reject(response.data.error);
@@ -81,14 +79,12 @@ class JwtService extends FuseUtils.EventEmitter {
 	signInWithToken = () => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get('/api/auth/access-token', {
-					data: {
-						access_token: this.getAccessToken()
-					}
+				.post('http://api.localhost/api/auth/access-token', {
+					token: this.getAccessToken()
 				})
 				.then(response => {
 					if (response.data.user) {
-						this.setSession(response.data.access_token);
+						this.setSession(response.data.token);
 						resolve(response.data.user);
 					} else {
 						this.logout();

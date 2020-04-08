@@ -46,7 +46,6 @@ function Login() {
 	}
 
 	function handleSubmit(model) {
-		console.log('Form submitted');
 		dispatch(authActions.submitLogin(model));
 	}
 
@@ -108,6 +107,12 @@ function Login() {
 									variant="outlined"
 									required
 								/>
+
+								<div className="flex justify-end">
+									<Link className="font-medium" to="/forgot-password">
+										Forgot Password?
+									</Link>
+								</div>
 
 								<Button
 									type="submit"

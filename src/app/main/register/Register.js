@@ -1,17 +1,18 @@
 import FuseAnimate from '@fuse/core/FuseAnimate';
-import { useForm } from '@fuse/hooks';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { darken } from '@material-ui/core/styles/colorManipulator';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { TextFieldFormsy } from '@fuse/core/formsy';
+import Icon from '@material-ui/core/Icon';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import * as authActions from 'app/auth/store/actions';
+import Formsy from 'formsy-react';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -23,28 +24,29 @@ const useStyles = makeStyles(theme => ({
 
 function RegisterPage() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const register = useSelector(({ auth }) => auth.register);
 
-	const { form, handleChange, resetForm } = useForm({
-		name: '',
-		email: '',
-		password: '',
-		passwordConfirm: '',
-		acceptTermsConditions: false
-	});
+	const [isFormValid, setIsFormValid] = useState(false);
+	const formRef = useRef(null);
 
-	function isFormValid() {
-		return (
-			form.email.length > 0 &&
-			form.password.length > 0 &&
-			form.password.length > 3 &&
-			form.password === form.passwordConfirm &&
-			form.acceptTermsConditions
-		);
+	useEffect(() => {
+		if (register.error && (register.error.username || register.error.password || register.error.email)) {
+			formRef.current.updateInputsWithError({ ...register.error });
+			disableButton();
+		}
+	}, [register.error]);
+
+	function disableButton() {
+		setIsFormValid(false);
 	}
 
-	function handleSubmit(ev) {
-		ev.preventDefault();
-		resetForm();
+	function enableButton() {
+		setIsFormValid(true);
+	}
+
+	function handleSubmit(model) {
+		dispatch(authActions.submitRegister(model));
 	}
 
 	return (
@@ -58,87 +60,117 @@ function RegisterPage() {
 							<Typography variant="h6" className="mt-16 mb-32">
 								CREATE AN ACCOUNT
 							</Typography>
-
-							<form
-								name="registerForm"
-								noValidate
+							<Formsy
+								onValidSubmit={handleSubmit}
+								onValid={enableButton}
+								onInvalid={disableButton}
+								ref={formRef}
 								className="flex flex-col justify-center w-full"
-								onSubmit={handleSubmit}
 							>
-								<TextField
+								<TextFieldFormsy
 									className="mb-16"
+									type="text"
+									name="username"
 									label="Username"
-									autoFocus
-									type="name"
-									name="name"
-									value={form.name}
-									onChange={handleChange}
+									validations={{
+										minLength: 5,
+										maxLength: 24
+									}}
+									validationErrors={{
+										minLength: 'Min character length is 5',
+										maxLength: 'Max character length is 24'
+									}}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<Icon className="text-20" color="action">
+													person
+												</Icon>
+											</InputAdornment>
+										)
+									}}
 									variant="outlined"
 									required
-									fullWidth
 								/>
 
-								<TextField
+								<TextFieldFormsy
 									className="mb-16"
-									label="Email"
-									type="email"
+									type="text"
 									name="email"
-									value={form.email}
-									onChange={handleChange}
+									label="Email"
+									validations="isEmail"
+									validationErrors={{
+										isEmail: 'Please enter a valid email'
+									}}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<Icon className="text-20" color="action">
+													email
+												</Icon>
+											</InputAdornment>
+										)
+									}}
 									variant="outlined"
 									required
-									fullWidth
 								/>
 
-								<TextField
+								<TextFieldFormsy
 									className="mb-16"
-									label="Password"
 									type="password"
 									name="password"
-									value={form.password}
-									onChange={handleChange}
+									label="Password"
+									validations="equalsField:password-confirm"
+									validationErrors={{
+										equalsField: 'Passwords do not match'
+									}}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<Icon className="text-20" color="action">
+													vpn_key
+												</Icon>
+											</InputAdornment>
+										)
+									}}
 									variant="outlined"
 									required
-									fullWidth
 								/>
 
-								<TextField
+								<TextFieldFormsy
 									className="mb-16"
-									label="Password (Confirm)"
 									type="password"
-									name="passwordConfirm"
-									value={form.passwordConfirm}
-									onChange={handleChange}
+									name="password-confirm"
+									label="Confirm Password"
+									validations="equalsField:password"
+									validationErrors={{
+										equalsField: 'Passwords do not match'
+									}}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<Icon className="text-20" color="action">
+													vpn_key
+												</Icon>
+											</InputAdornment>
+										)
+									}}
 									variant="outlined"
 									required
-									fullWidth
 								/>
-
-								<FormControl className="items-center">
-									<FormControlLabel
-										control={
-											<Checkbox
-												name="acceptTermsConditions"
-												checked={form.acceptTermsConditions}
-												onChange={handleChange}
-											/>
-										}
-										label="I read and accept terms and conditions"
-									/>
-								</FormControl>
 
 								<Button
+									type="submit"
 									variant="contained"
 									color="primary"
-									className="w-224 mx-auto mt-16"
-									aria-label="Register"
-									disabled={!isFormValid()}
-									type="submit"
+									className="w-full mx-auto mt-16 normal-case"
+									aria-label="REGISTER"
+									disabled={!isFormValid}
+									value="legacy"
 								>
-									CREATE AN ACCOUNT
+									Register
 								</Button>
-							</form>
-
+							</Formsy>
 							<div className="flex flex-col items-center justify-center pt-32 pb-24">
 								<span className="font-medium">Already have an account?</span>
 								<Link className="font-medium" to="/login">

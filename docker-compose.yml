@@ -1,12 +1,55 @@
 version: '2.4'
 
 services:
-    client:
+    traefik:
+        image: traefik:v2.2
+        command:
+            - --entrypoints.web.address=:80
+            - --providers.docker=true
+            - --api.insecure
+        ports:
+            - '80:80'
+            - '8080:8080'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        labels:
+            - 'traefik.http.routers.traefik.rule=Host(`traefik.localhost`)'
+            - 'traefik.http.services.traefik.loadbalancer.server.port=8080'
+
+    web:
         build:
             context: .
             target: dev
         ports:
             - '3000:3000'
+        depends_on:
+            - api
         volumes:
             - .:/node/app
             - /node/app/node_modules
+        labels:
+            - 'traefik.http.routers.web.rule=Host(`localhost`)'
+            - 'traefik.http.services.web.loadbalancer.server.port=3000'
+
+    api:
+        image: notable-api:latest
+        ports:
+            - '5000:5000'
+        depends_on:
+            - db
+        labels:
+            - 'traefik.http.routers.api.rule=Host(`api.localhost`)'
+            - 'traefik.http.services.api.loadbalancer.server.port=5000'
+            - 'traefik.http.routers.api.middlewares=corsheader'
+            - 'traefik.http.middlewares.corsheader.headers.accesscontrolalloworiginlist=http://localhost'
+            - 'traefik.http.middlewares.corsheader.headers.accesscontrolallowHeaders=*'
+
+    db:
+        image: mongo:4.2.5
+        ports:
+            - '27017:27017'
+        volumes:
+            - mongo-data:/data/db
+
+volumes:
+    mongo-data:

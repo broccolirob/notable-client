@@ -4,11 +4,11 @@ import * as UserActions from './user.actions';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
-export function submitRegister({ displayName, password, email }) {
+export function submitRegister({ username, password, email }) {
 	return dispatch =>
 		jwtService
 			.createUser({
-				displayName,
+				username,
 				password,
 				email
 			})

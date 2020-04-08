@@ -14,17 +14,17 @@ export const USER_LOGGED_OUT = '[USER] LOGGED OUT';
 export function setUserData(user) {
 	return dispatch => {
 		/*
-        You can redirect the logged-in user to a specific route depending on his role
-         */
+      You can redirect the logged-in user to a specific route depending on his role
+		*/
 
 		// history.location.state = {
-		//     redirectUrl: user.redirectUrl // for example 'apps/academy'
-		// }
+		// 	redirectUrl: user.redirectUrl // for example 'apps/academy'
+		// };
 
 		/*
-        Set User Settings
-         */
-		dispatch(FuseActions.setDefaultSettings(user.data.settings));
+			Set User Settings
+		*/
+		dispatch(FuseActions.setDefaultSettings(user.settings));
 
 		/*
         Set User Data

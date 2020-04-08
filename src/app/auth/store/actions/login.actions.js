@@ -1,4 +1,5 @@
 import jwtService from 'app/services/jwtService';
+import * as Actions from 'app/store/actions';
 import * as UserActions from './user.actions';
 
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -16,9 +17,11 @@ export function submitLogin({ email, password }) {
 				});
 			})
 			.catch(error => {
+				dispatch(Actions.showMessage({ message: error.message, variant: 'error' }));
+
 				return dispatch({
 					type: LOGIN_ERROR,
-					payload: error
+					payload: error.fields
 				});
 			});
 }
