@@ -51,7 +51,7 @@ function NoteList(props) {
 	}, [notes, searchText, props.match]);
 
 	return !filteredData || filteredData.length === 0 ? (
-		<div className="flex items-center justify-center h-full">
+		<div className="flex items-center justify-center mt-20">
 			<Typography color="textSecondary" variant="h5">
 				There are no notes!
 			</Typography>

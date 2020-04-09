@@ -1,4 +1,4 @@
-import './notes-db';
+// import './notes-db';
 // import './auth-db';
 import mock from './mock';
 

@@ -13,7 +13,7 @@ const notesReducer = (state = initialState, action) => {
 		case Actions.GET_NOTES: {
 			return {
 				...state,
-				entities: _.keyBy(action.payload, 'id')
+				entities: _.keyBy(action.payload, '_id')
 			};
 		}
 		case Actions.SET_SEARCH_TEXT: {

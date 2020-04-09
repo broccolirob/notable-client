@@ -11,7 +11,7 @@ const labelsReducer = (state = initialState, action) => {
 		case Actions.GET_LABELS: {
 			return {
 				...state,
-				entities: _.keyBy(action.payload, 'id')
+				entities: _.keyBy(action.payload, '_id')
 			};
 		}
 		case Actions.UPDATE_LABELS: {

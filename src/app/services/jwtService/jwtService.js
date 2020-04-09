@@ -47,7 +47,7 @@ class JwtService extends FuseUtils.EventEmitter {
 
 	createUser = data => {
 		return new Promise((resolve, reject) => {
-			api.post(`http://api.localhost/api/auth/register`, data).then(response => {
+			api.post('/api/auth/register', data).then(response => {
 				if (response.data.user) {
 					this.setSession(response.data.token);
 					resolve(response.data.user);
@@ -60,7 +60,7 @@ class JwtService extends FuseUtils.EventEmitter {
 
 	signInWithEmailAndPassword = (email, password) => {
 		return new Promise((resolve, reject) => {
-			api.post('http://api.localhost/api/auth', {
+			api.post('/api/auth', {
 				email,
 				password
 			}).then(response => {
@@ -76,7 +76,7 @@ class JwtService extends FuseUtils.EventEmitter {
 
 	signInWithToken = () => {
 		return new Promise((resolve, reject) => {
-			api.post('http://api.localhost/api/auth/access-token', {
+			api.post('/api/auth/access-token', {
 				token: this.getAccessToken()
 			})
 				.then(response => {

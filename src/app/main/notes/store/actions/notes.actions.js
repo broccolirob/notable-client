@@ -1,4 +1,4 @@
-import api from 'app/services/api';
+import api from '../../../../services/api';
 
 export const GET_NOTES = '[NOTES APP] GET NOTES';
 export const SET_SEARCH_TEXT = '[NOTES APP] SET SEARCH TEXT';

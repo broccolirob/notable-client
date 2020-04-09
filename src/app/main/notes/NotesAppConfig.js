@@ -10,7 +10,7 @@ const NotesConfig = {
 	auth: authRoles.user,
 	routes: [
 		{
-			path: '/dashboard/:id?/:labelHandle?/:labelId?',
+			path: '/notes/:id?/:labelHandle?/:labelId?',
 			component: React.lazy(() => import('./NotesApp'))
 		}
 	]

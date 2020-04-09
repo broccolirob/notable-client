@@ -6,7 +6,7 @@ export const LABELS_DIALOG_CLOSE = '[NOTES APP] LABELS DIALOG CLOSE';
 export const UPDATE_LABELS = '[NOTES APP] LABELS UPDATE LABELS';
 
 export function getLabels() {
-	const request = api.get('/api/labels');
+	const request = api.get('/api/notes/labels');
 
 	return dispatch =>
 		request.then(response =>
@@ -18,7 +18,7 @@ export function getLabels() {
 }
 
 export function updateLabels(labels) {
-	const request = api.post('/api/update-labels', { labels: Object.values(labels) });
+	const request = api.post('/api/notes/update-labels', { labels: Object.values(labels) });
 
 	return dispatch =>
 		request.then(response =>
