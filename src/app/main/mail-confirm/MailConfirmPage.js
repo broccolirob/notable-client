@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function MailConfirmPage() {
+	const user = useSelector(({ auth }) => auth.user);
 	const classes = useStyles();
 
 	return (
@@ -36,11 +38,15 @@ function MailConfirmPage() {
 							</Typography>
 
 							<Typography className="text-center mb-16 w-full" color="textSecondary">
-								A confirmation e-mail has been sent to <b>example@mymail.com</b>.
+								A confirmation e-mail has been sent to <b>{user.email}</b>.
+							</Typography>
+
+							<Typography className="text-center mb-16 w-full" color="textSecondary">
+								Check your inbox and click on the "Confirm my email" link to confirm your email address.
 							</Typography>
 
 							<Typography className="text-center w-full" color="textSecondary">
-								Check your inbox and click on the "Confirm my email" link to confirm your email address.
+								Didn't recieve the email? <b>Resend Email</b>
 							</Typography>
 
 							<div className="flex flex-col items-center justify-center pt-32 pb-24">

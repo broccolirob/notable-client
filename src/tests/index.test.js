@@ -4,6 +4,6 @@ describe('Top level test', () => {
 	});
 
 	it('should do math', () => {
-		expect(1 + 1).toBe(2);
+		expect(1 + 1).toBe(5);
 	});
 });

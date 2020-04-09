@@ -1,8 +1,13 @@
+# I've use alot of container_name flags here. Keep in mind if doing the swarm scale=3 thing, this will error out cause
+# each needs a unique name.
+# TODO: look into extended docker compose files for this and notable-api
+
 version: '2.4'
 
 services:
     traefik:
         image: traefik:v2.2
+        container_name: notable-traefik
         command:
             - --entrypoints.web.address=:80
             - --providers.docker=true
@@ -20,6 +25,7 @@ services:
         build:
             context: .
             target: dev
+        container_name: notable-web
         ports:
             - '3000:3000'
         depends_on:
@@ -33,8 +39,14 @@ services:
 
     api:
         image: notable-api:latest
+        container_name: notable-api
         ports:
             - '5000:5000'
+        environment:
+            - JWT_SECRET=${JWT_SECRET}
+            - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+            - FROM_EMAIL=${FROM_EMAIL}
+            - DB_HOST=${DB_HOST}
         depends_on:
             - db
         labels:
@@ -46,10 +58,15 @@ services:
 
     db:
         image: mongo:4.2.5
+        container_name: notable-db
         ports:
             - '27017:27017'
         volumes:
             - mongo-data:/data/db
 
+# Docker compose throws on a prefix to named volumes. Since we're sharing this setup with notable-api this is no bueno.
+# name flag means it will use that clean name for the volume. External flag means it already exists (throws error if not found).
 volumes:
     mongo-data:
+        external: true
+        name: mongo-data

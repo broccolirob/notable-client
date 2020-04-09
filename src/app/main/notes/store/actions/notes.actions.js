@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from 'app/services/api';
 
 export const GET_NOTES = '[NOTES APP] GET NOTES';
 export const SET_SEARCH_TEXT = '[NOTES APP] SET SEARCH TEXT';
@@ -10,7 +10,7 @@ export const REMOVE_NOTE = '[NOTES APP] REMOVE NOTE';
 export const TOGGLE_VARIATE_DESC_SIZE = '[NOTES APP] TOGGLE VARIATE DESC SIZE';
 
 export function getNotes() {
-	const request = axios.get('/api/notes');
+	const request = api.get('/api/notes');
 
 	return dispatch =>
 		request.then(response =>
@@ -55,7 +55,7 @@ export function closeNoteDialog() {
 }
 
 export function createNote(note) {
-	const request = axios.post('/api/create-note', {
+	const request = api.post('/api/create-note', {
 		note
 	});
 	return dispatch =>
@@ -68,7 +68,7 @@ export function createNote(note) {
 }
 
 export function updateNote(note) {
-	const request = axios.post('/api/update-note', {
+	const request = api.post('/api/update-note', {
 		note
 	});
 
@@ -82,7 +82,7 @@ export function updateNote(note) {
 }
 
 export function removeNote(noteId) {
-	const request = axios.post('/api/remove-note', {
+	const request = api.post('/api/remove-note', {
 		noteId
 	});
 	return dispatch =>

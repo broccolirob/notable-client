@@ -27,8 +27,8 @@ export function setUserData(user) {
 		dispatch(FuseActions.setDefaultSettings(user.settings));
 
 		/*
-        Set User Data
-         */
+			Set User Data
+		*/
 		dispatch({
 			type: SET_USER_DATA,
 			payload: user
