@@ -3,7 +3,7 @@ import FuseUtils from '@fuse/utils';
 function NoteModel(data) {
 	const item = data || {};
 	return {
-		id: item.id || FuseUtils.generateGUID(),
+		id: item._id || FuseUtils.generateGUID(),
 		title: item.title || '',
 		description: item.description || '',
 		archive: item.archive || false,

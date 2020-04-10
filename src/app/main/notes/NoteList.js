@@ -74,7 +74,7 @@ function NoteList(props) {
 			>
 				{filteredData.map(note => (
 					<NoteListItem
-						key={note.id}
+						key={note._id}
 						note={note}
 						className="w-full rounded-8 shadow-none border-1 mb-16"
 						variateDescSize={variateDescSize}

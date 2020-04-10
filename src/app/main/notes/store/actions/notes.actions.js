@@ -55,7 +55,7 @@ export function closeNoteDialog() {
 }
 
 export function createNote(note) {
-	const request = api.post('/api/create-note', {
+	const request = api.post('/api/notes/create-note', {
 		note
 	});
 	return dispatch =>
